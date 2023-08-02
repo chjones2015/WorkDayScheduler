@@ -2,6 +2,16 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 $(function () {
+
+  const currentDate = moment().format("dddd, MMMM Do YYYY");
+  const dateDisplay = document.getElementById("currentDay");
+  dateDisplay.textContent = currentDate;
+  
+  const currentHour = moment().hour();
+  
+  const timeBlocks = Array.from({length: 9}, (_, i) => i + 9);
+  
+  const planner = document.getElementById("planner");
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
