@@ -38,7 +38,24 @@ timeBlocks.forEach(hour => {
   planner.appendChild(timeBlock);
 });
 
+// TODO 4: Add a click event listener to the save button in each time block
+planner.addEventListener("click", event => {
+  if (event.target.matches(".saveBtn")) {
+    const timeBlock = event.target.closest(".time-block");
+    const hour = timeBlock.querySelector(".hour").textContent;
+    const description = timeBlock.querySelector(".description").value;
+    localStorage.setItem(hour, description);
+  }
+});
 
+// TODO 5: Get any user input that was saved in local storage and set the values of the corresponding textarea elements
+timeBlocks.forEach(hour => {
+  const description = localStorage.getItem(moment(hour, "H").format("hA"));
+  if (description) {
+    const timeBlock = planner.querySelector(`.hour:contains(${moment(hour, "H").format("hA")})`).closest(".time-block");
+    timeBlock.querySelector(".description").value = description;
+  }
+});
 
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
